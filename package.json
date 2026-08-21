@@ -1,0 +1,15 @@
+{
+  "name": "analystos",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-first, source-backed public equity research operating system.",
+  "scripts": {
+    "dev": "node --experimental-strip-types src/web/server.ts",
+    "start": "node --experimental-strip-types src/web/server.ts",
+    "mcp": "node --experimental-strip-types src/mcp/server.ts",
+    "test": "node --experimental-strip-types --test src/tests/*.test.ts",
+    "check": "node --experimental-strip-types --check src/domain/types.ts && node --experimental-strip-types --check src/services/research-kernel.ts"
+  },
+  "engines": { "node": ">=22" }
+}
