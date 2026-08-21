@@ -16,3 +16,8 @@
 - **Contradiction**: an explicit pair of incompatible claims; it remains visible until explained or resolved.
 
 Phase 3 adds themes, events, discovery candidates, and generalized relationships.
+
+- **Theme**: a cross-company or cross-industry research subject; it may remain uninvestable.
+- **Event**: dated development linked to entities and sources.
+- **Relationship**: typed, evidence-backed entity edge.
+- **Discovery Candidate**: inbox item representing a signal, pattern, theme candidate, or contradiction, always linked to the underlying research state.

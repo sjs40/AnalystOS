@@ -1,6 +1,6 @@
 # AnalystOS
 
-Local-first, source-backed research state for public-equity analysis. Phase 2 adds testable hypotheses, living theses with immutable revision history, required and kill conditions, risks, catalysts, forecasts, contradictions, expanded MCP tools, and a synthetic SLM workflow evaluation.
+Local-first, source-backed research state for public-equity analysis. Phase 3 adds themes, events, relationships, a discovery inbox, deterministic cross-company synthesis, contradiction analytics, theme breadth/acceleration, and a synthetic multi-company evaluation.
 
 ## Quick start
 

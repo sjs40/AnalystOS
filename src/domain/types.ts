@@ -9,6 +9,9 @@ export type QuestionStatus = 'OPEN' | 'INVESTIGATING' | 'PARTIALLY_ANSWERED' | '
 export type HypothesisStatus = 'PROPOSED' | 'TESTING' | 'SUPPORTED' | 'REFUTED' | 'INCONCLUSIVE';
 export type ThesisStatus = 'EXPLORING' | 'ACTIVE' | 'STRENGTHENING' | 'WEAKENING' | 'CONFLICTED' | 'BROKEN' | 'CLOSED';
 export type ConditionType = 'REQUIRED' | 'KILL';
+export type DiscoveryCandidateType = 'SIGNAL' | 'PATTERN' | 'THEME_CANDIDATE' | 'CONTRADICTION';
+export type DiscoveryStatus = 'INBOX' | 'REVIEWING' | 'ACCEPTED' | 'DISMISSED';
+export type RelationshipType = 'SUPPLIES' | 'CUSTOMER_OF' | 'COMPETES_WITH' | 'EXPOSED_TO' | 'AFFECTS' | 'RELATED_TO' | 'LEADS' | 'FOLLOWS';
 
 export interface Entity { id: string; type: EntityType; name: string; aliases: string[]; metadata: Record<string, unknown>; createdAt: string; }
 export interface Company extends Entity { type: 'COMPANY'; legalName: string; commonName?: string; ticker?: string; cik?: string; website?: string; investorRelationsUrl?: string; }
@@ -26,6 +29,11 @@ export interface Risk { id: string; thesisId: string; statement: string; likelih
 export interface Catalyst { id: string; thesisId: string; statement: string; expectedAt?: string; evidenceIds: string[]; createdAt: string; }
 export interface Forecast { id: string; thesisId: string; metric: string; period: string; value: number; unit: string; assumptions: string[]; createdAt: string; }
 export interface Contradiction { id: string; thesisId?: string; claimAId: string; claimBId: string; description: string; status: 'OPEN' | 'EXPLAINED' | 'RESOLVED'; createdAt: string; }
+export interface Theme { id: string; name: string; description?: string; status: 'CANDIDATE' | 'ACTIVE' | 'ARCHIVED'; entityIds: string[]; createdAt: string; updatedAt: string; }
+export interface ResearchEvent { id: string; title: string; occurredAt?: string; description?: string; entityIds: string[]; sourceIds: string[]; createdAt: string; }
+export interface Relationship { id: string; fromEntityId: string; toEntityId: string; type: RelationshipType; confidence?: number; evidenceIds: string[]; createdAt: string; }
+export interface DiscoveryCandidate { id: string; type: DiscoveryCandidateType; title: string; description: string; status: DiscoveryStatus; confidence: number; themeId?: string; companyIds: string[]; sourceIds: string[]; claimIds: string[]; evidenceIds: string[]; tags: string[]; createdAt: string; updatedAt: string; }
+export interface ThemeMetrics { themeId: string; breadth: number; acceleration: number; candidateCount: number; companyIds: string[]; }
 
 export function questionPriority(question: Pick<ResearchQuestion, 'importance' | 'uncertainty' | 'thesisImpact'>): number {
   return Number((question.importance * question.uncertainty * question.thesisImpact).toFixed(4));
