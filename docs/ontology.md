@@ -8,4 +8,11 @@
 - **Research Question**: persistent, branchable uncertainty with deterministic priority = importance × uncertainty × thesis impact.
 - **Research Run / Step**: audit record for a workflow and its individual operations.
 
-Phase 2 adds hypotheses, theses, revisions, risks, catalysts, forecasts, conditions, and contradictions. Phase 3 adds themes, events, discovery candidates, and generalized relationships.
+- **Hypothesis**: a testable explanation or expectation, with supporting and contradicting claims.
+- **Thesis**: a living research object, never a position. Its current state points to a revision.
+- **Thesis Revision**: immutable thesis snapshot with confidence, state, linked evidence, and a change summary.
+- **Required / Kill Condition**: explicit condition necessary for the thesis or capable of invalidating it.
+- **Risk / Catalyst / Forecast**: structured thesis-linked inputs rather than prose embedded in a memo.
+- **Contradiction**: an explicit pair of incompatible claims; it remains visible until explained or resolved.
+
+Phase 3 adds themes, events, discovery candidates, and generalized relationships.

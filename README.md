@@ -1,6 +1,6 @@
 # AnalystOS
 
-Local-first, source-backed research state for public-equity analysis. The first delivered increment is the Phase 1 source-and-evidence kernel: immutable source records, observations, classified claims, directional evidence, persistent questions, SEC EDGAR access, a local UI, and MCP tools.
+Local-first, source-backed research state for public-equity analysis. Phase 2 adds testable hypotheses, living theses with immutable revision history, required and kill conditions, risks, catalysts, forecasts, contradictions, expanded MCP tools, and a synthetic SLM workflow evaluation.
 
 ## Quick start
 
@@ -15,7 +15,7 @@ The included runnable kernel uses `.analystos/research-state.json` for local dem
 
 ## First research flow
 
-Use `SecEdgarProvider` from `src/providers/sec-edgar.ts` to find and fetch a filing, pass its normalized text to `ResearchKernel.ingestText`, then call `extractObservations`, `proposeClaim`, and `createQuestion`. Use `lineage(claimId)` to audit the complete claim → evidence → observation → source path.
+Use `SecEdgarProvider` from `src/providers/sec-edgar.ts` to find and fetch a filing, pass its normalized text to `ResearchKernel.ingestText`, then call `extractObservations`, `proposeClaim`, and `createQuestion`. Use `lineage(claimId)` to audit the complete claim → evidence → observation → source path. Create a hypothesis and then `createThesis`; use `reviseThesis` after new evidence so prior state is never overwritten.
 
 ## Design guarantees
 
