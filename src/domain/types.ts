@@ -6,6 +6,9 @@ export type ClaimType = 'FACT' | 'MANAGEMENT_CLAIM' | 'ESTIMATE' | 'INFERENCE' |
 export type ClaimStatus = 'CANDIDATE' | 'SUPPORTED' | 'WEAKLY_SUPPORTED' | 'CONFLICTED' | 'INSUFFICIENT_EVIDENCE' | 'REJECTED' | 'STALE';
 export type EvidenceDirection = 'SUPPORTS' | 'CONTRADICTS' | 'CONTEXT' | 'NEUTRAL';
 export type QuestionStatus = 'OPEN' | 'INVESTIGATING' | 'PARTIALLY_ANSWERED' | 'ANSWERED' | 'UNRESOLVED' | 'UNKNOWABLE' | 'ARCHIVED';
+export type HypothesisStatus = 'PROPOSED' | 'TESTING' | 'SUPPORTED' | 'REFUTED' | 'INCONCLUSIVE';
+export type ThesisStatus = 'EXPLORING' | 'ACTIVE' | 'STRENGTHENING' | 'WEAKENING' | 'CONFLICTED' | 'BROKEN' | 'CLOSED';
+export type ConditionType = 'REQUIRED' | 'KILL';
 
 export interface Entity { id: string; type: EntityType; name: string; aliases: string[]; metadata: Record<string, unknown>; createdAt: string; }
 export interface Company extends Entity { type: 'COMPANY'; legalName: string; commonName?: string; ticker?: string; cik?: string; website?: string; investorRelationsUrl?: string; }
@@ -15,6 +18,14 @@ export interface Claim { id: string; text: string; type: ClaimType; status: Clai
 export interface Evidence { id: string; claimId: string; observationId?: string; sourceId: string; direction: EvidenceDirection; strength?: number; rationale?: string; createdAt: string; }
 export interface ResearchQuestion { id: string; question: string; status: QuestionStatus; importance: number; uncertainty: number; thesisImpact: number; parentQuestionId?: string; entityIds: string[]; currentAnswer?: string; answerConfidence?: number; createdAt: string; updatedAt: string; }
 export interface ResearchRun { id: string; workflow: string; status: 'RUNNING' | 'COMPLETED' | 'FAILED'; input: Record<string, unknown>; output?: Record<string, unknown>; startedAt: string; completedAt?: string; }
+export interface Hypothesis { id: string; statement: string; status: HypothesisStatus; entityIds: string[]; themeIds: string[]; supportingClaimIds: string[]; contradictingClaimIds: string[]; confidence?: number; createdAt: string; updatedAt: string; }
+export interface Thesis { id: string; title: string; companyId?: string; status: ThesisStatus; currentRevisionId: string; confidence: number; variantPerception?: string; hypothesisIds: string[]; questionIds: string[]; createdAt: string; updatedAt: string; }
+export interface ThesisRevision { id: string; thesisId: string; revisionNumber: number; summary: string; confidence: number; status: ThesisStatus; evidenceIds: string[]; hypothesisIds: string[]; questionIds: string[]; changeSummary: string; createdAt: string; }
+export interface ThesisCondition { id: string; thesisId: string; type: ConditionType; statement: string; status: 'OPEN' | 'MET' | 'TRIGGERED' | 'EXPIRED'; evidenceIds: string[]; createdAt: string; updatedAt: string; }
+export interface Risk { id: string; thesisId: string; statement: string; likelihood: number; impact: number; evidenceIds: string[]; createdAt: string; }
+export interface Catalyst { id: string; thesisId: string; statement: string; expectedAt?: string; evidenceIds: string[]; createdAt: string; }
+export interface Forecast { id: string; thesisId: string; metric: string; period: string; value: number; unit: string; assumptions: string[]; createdAt: string; }
+export interface Contradiction { id: string; thesisId?: string; claimAId: string; claimBId: string; description: string; status: 'OPEN' | 'EXPLAINED' | 'RESOLVED'; createdAt: string; }
 
 export function questionPriority(question: Pick<ResearchQuestion, 'importance' | 'uncertainty' | 'thesisImpact'>): number {
   return Number((question.importance * question.uncertainty * question.thesisImpact).toFixed(4));
